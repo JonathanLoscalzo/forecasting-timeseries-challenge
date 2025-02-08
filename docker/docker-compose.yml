@@ -4,5 +4,6 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     container_name: forecasting-api
+    image: forecasting-api
     ports:
       - "8002:80"

@@ -13,6 +13,4 @@ RUN poetry install --no-interaction --no-root --without dev
 
 COPY . .
 
-# CMD ["fastapi", "run", "forecasting/clients/api.py", "--host", "0.0.0.0", "--port", "80"]
-# CMD ["python3", "-m", "", "forecasting.clients.api:app", "--host", "0.0.0.0", "--port", "80"]
 CMD ["poetry", "run", "uvicorn", "forecasting.clients.api:app", "--workers", "3", "--host", "0.0.0.0", "--port", "80"]uvicorn
