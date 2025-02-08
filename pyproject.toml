@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "forecasting-app"
+name = "forecasting"
 version = "0.1.0"
 description = ""
 authors = ["Jonathan Loscalzo <jonathan.loscalzo@trueaccord.com>"]
@@ -12,8 +12,10 @@ testpaths = ["forecasting/tests"]
 [tool.poetry.dependencies]
 python = "^3.12"
 black = "^25.1.0"
+matplotlib = "^3.10.0"
 pandas = "^2.2.3"
 pydantic = "^2.10.6"
+streamlit = "^1.42.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -35,3 +37,7 @@ max-line-length = 120
 
 [tool.pytest]
 addopts = "-ra -q"
+
+
+[tool.poetry.scripts]
+forecast-ui = "forecasting.clients.streamlit:init"
