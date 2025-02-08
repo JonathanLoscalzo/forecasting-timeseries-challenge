@@ -1,26 +1,19 @@
-from datetime import date
+from dependency_injector.wiring import Provide, inject
+from fastapi import APIRouter, Depends
 
-from fastapi import APIRouter
-from pydantic import BaseModel, Field
-
+from forecasting.infra.fastapi.dependencies import InferenceService
+from forecasting.infra.fastapi.routers.dtos import Data, Item
+from forecasting.infra.injector import ApiContainer
 from forecasting.models.const import ModelName
 
 router = APIRouter()
 
 
-class Item(BaseModel):
-    date: date
-    value: float = Field(gt=0)
-
-
-class Data(BaseModel):
-    historical: list[Item]
-    start_date: date
-    horizon: int = Field(default=7, gt=0)
-
-
-@router.post("/forecast/", tags=["inference"])
-async def forecast(data: Data, model_name: ModelName = ModelName.simple_average):
-    print(data)
-    print(model_name)
-    return [{"username": "Rick"}, {"username": "Morty"}]
+@router.post("/forecast/", tags=["inference"], response_model=list[Item])
+@inject
+async def forecast(
+    data: Data,
+    model_name: ModelName = ModelName.simple_average,
+    inference_service: InferenceService = Depends(Provide[ApiContainer.inference_service]),
+):
+    return inference_service.forecast(data, model_name=model_name)

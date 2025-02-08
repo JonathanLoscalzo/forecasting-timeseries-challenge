@@ -1,15 +1,15 @@
-from pydantic import BaseModel
 from datetime import date
-from typing import List
+
+from pydantic import BaseModel
 
 
 class Item(BaseModel):
     date: date
-    value: float
+    value: float | None
 
 
 class Data(BaseModel):
-    historical: List[Item]
+    historical: list[Item]
     start_date: date
     horizon: int = 7
 

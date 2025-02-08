@@ -1,6 +1,9 @@
+import numpy as np
 import pandas as pd
+
 from forecasting.models.core import ForecastModel
-from forecasting.models.entities import Data, Item as Prediction
+from forecasting.models.entities import Data
+from forecasting.models.entities import Item as Prediction
 
 
 class SimpleAverageModel(ForecastModel):
@@ -45,9 +48,9 @@ class SimpleAverageModel(ForecastModel):
             # group by the weekday and filters the last four entries before current date
             value = df[(df.date < df.iloc[-idx].date) & (df.date.dt.weekday == weekday)][-5:].value.mean()
             # update value, it will be used if the horizon is further out
-            df.iloc[-idx, 1] = value
+            df.iloc[-idx, 1] = value  # if data is not valid, some values could be NaN
 
         return [
             Prediction(date=item.get("date", None), value=item.get("value", 0.0))
-            for item in df[df.date >= prediction_dates[0]].to_dict(orient="records")
+            for item in df[df.date >= prediction_dates[0]].replace({np.nan: None}).to_dict(orient="records")
         ]
