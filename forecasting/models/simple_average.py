@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from loguru import logger
 
 from forecasting.models.core import ForecastModel
 from forecasting.models.entities import Data
@@ -25,6 +26,7 @@ class SimpleAverageModel(ForecastModel):
         Returns:
             List[Prediction]: A list of predicted values with corresponding dates.
         """
+        logger.info("Generating forecast using Simple Average Model")
         # Creates a dataframe with the current values
         df = pd.DataFrame([item.model_dump() for item in data.historical])
         df.date = pd.to_datetime(df.date)
@@ -49,6 +51,8 @@ class SimpleAverageModel(ForecastModel):
             value = df[(df.date < df.iloc[-idx].date) & (df.date.dt.weekday == weekday)][-5:].value.mean()
             # update value, it will be used if the horizon is further out
             df.iloc[-idx, 1] = value  # if data is not valid, some values could be NaN
+
+        logger.info("Forecast generated successfully")
 
         return [
             Prediction(date=item.get("date", None), value=item.get("value", 0.0))
