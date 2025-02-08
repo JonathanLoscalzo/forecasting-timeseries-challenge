@@ -7,6 +7,24 @@
 It's recommended to use `pyenv` or `asdf` to manage Python versions.
 This guide uses `asdf`: [https://asdf-vm.com/](https://asdf-vm.com/), but `pyenv` is also a valid option.
 
+## Quick Setup
+Using `make` is it more quick to setup the environment. By the way, in the other section I have explained how to do it manually.
+
+```sh
+Usage:
+  make setup       - Set up the environment (install dependencies, pre-commit hooks, etc.)
+  make test        - Run all tests
+  make coverage    - Run tests with coverage
+  make docker-up   - Start Docker containers (use -d to run in detached mode)
+  make docker-build - Build and start Docker containers
+  make docker-stop - Stop and remove Docker containers
+  make api         - Start the forecast API
+  make ui          - Start the Streamlit UI
+  make stop-ui     - Stop the Streamlit UI
+  make clean       - Clean up the environment (remove .venv and other generated files)
+  make help        - Show this help message
+```
+
 ## Setting Up the Environment (Optional)
 
 If you want to use a virtual environment (you must do):
