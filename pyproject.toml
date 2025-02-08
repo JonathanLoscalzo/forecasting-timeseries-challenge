@@ -10,11 +10,15 @@ pythonpath = ["forecasting"]
 testpaths = ["forecasting/tests"]
 markers = ["integration"]
 
+[tool.pytest]
+addopts = "-ra -q"
+
 [tool.poetry.dependencies]
 python = "^3.12"
 black = "^25.1.0"
 dependency-injector = "^4.45.0"
 fastapi = { extras = ["standard"], version = "^0.115.8" }
+loguru = "^0.7.3"
 matplotlib = "^3.10.0"
 pandas = "^2.2.3"
 pydantic = "^2.10.6"
@@ -39,10 +43,7 @@ line-length = 120
 [tool.flake8]
 max-line-length = 120
 
-[tool.pytest]
-addopts = "-ra -q"
-
 
 [tool.poetry.scripts]
 forecast-ui = "forecasting.clients.streamlit:init"
-forecast-api = "forecasting.clients.api:main"
+forecast-api = "forecasting.clients.api:app"
