@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.pytest.ini_options]
 pythonpath = ["forecasting"]
 testpaths = ["forecasting/tests"]
+markers = ["integration"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
