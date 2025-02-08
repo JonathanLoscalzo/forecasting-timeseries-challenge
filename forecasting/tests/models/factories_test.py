@@ -15,8 +15,8 @@ def test_create_model_with_custom_registry():
     result = model.forecast(data)
 
     assert len(result) == data.horizon
-    assert result[0].date == start_date
-    assert result[-1].date == start_date + timedelta(days=data.horizon - 1)
+    for i in range(data.horizon):
+        assert result[i].date == start_date + timedelta(days=i)
 
 
 def test_create_model_with_fake_model():
@@ -32,4 +32,5 @@ def test_create_model_with_fake_model():
     result = model.forecast(data)
 
     assert len(result) == 1
-    assert result[0].date == today
+    for i in range(data.horizon):
+        assert result[i].date == today + timedelta(days=i)

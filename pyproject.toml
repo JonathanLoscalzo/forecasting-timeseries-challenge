@@ -10,6 +10,8 @@ pythonpath = ["forecasting"]
 testpaths = ["forecasting/tests"]
 markers = ["integration"]
 
+filterwarnings = ["ignore::DeprecationWarning:holidays"]
+
 [tool.pytest]
 addopts = "-ra -q"
 
@@ -21,6 +23,7 @@ fastapi = { extras = ["standard"], version = "^0.115.8" }
 loguru = "^0.7.3"
 matplotlib = "^3.10.0"
 pandas = "^2.2.3"
+prophet = "^1.1.6"
 pydantic = "^2.10.6"
 streamlit = "^1.42.0"
 
