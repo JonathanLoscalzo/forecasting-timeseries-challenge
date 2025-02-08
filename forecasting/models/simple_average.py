@@ -22,15 +22,17 @@ class SimpleAverageModel(ForecastModel):
         Returns:
             List[Prediction]: A list of predicted values with corresponding dates.
         """
-
+        # Creates a dataframe with the current values
         df = pd.DataFrame([item.model_dump() for item in data.historical])
         df.date = pd.to_datetime(df.date)
         df.value = df.value.astype("float64")
+
         prediction_dates = pd.date_range(
             data.start_date,
             periods=data.horizon,
             freq="d",
         )
+        # concat the dates we must predict
         df = pd.concat(
             [
                 df,
@@ -40,8 +42,11 @@ class SimpleAverageModel(ForecastModel):
 
         for idx in range(data.horizon, 0, -1):
             weekday = df.iloc[-idx].date.weekday()
+            # group by the weekday and filters the last four entries before current date
             value = df[(df.date < df.iloc[-idx].date) & (df.date.dt.weekday == weekday)][-5:].value.mean()
+            # update value, it will be used if the horizon is further out
             df.iloc[-idx, 1] = value
+
         return [
             Prediction(date=item.get("date", None), value=item.get("value", 0.0))
             for item in df[df.date >= prediction_dates[0]].to_dict(orient="records")
