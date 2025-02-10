@@ -77,10 +77,10 @@ docker-stop:
 .PHONY: api
 api:
 	@echo "🚀 Starting API..."
-	@forecast-api &
-	@sleep 2
-	@echo "🌍 Opening API in browser..."
-	@$(BROWSER) http://127.0.0.1:8000/docs
+	@forecast-api
+# @sleep 2
+# @echo "🌍 Opening API in browser..."
+# @$(BROWSER) http://127.0.0.1:8000/docs
 
 .PHONY: ui
 ui:

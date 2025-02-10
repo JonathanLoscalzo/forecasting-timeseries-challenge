@@ -50,4 +50,4 @@ max-line-length = 120
 
 [tool.poetry.scripts]
 forecast-ui = "forecasting.clients.streamlit:init"
-forecast-api = "forecasting.clients.api:app"
+forecast-api = "forecasting.clients.api:main"
