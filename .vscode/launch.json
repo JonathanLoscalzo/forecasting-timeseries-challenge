@@ -13,7 +13,10 @@
                 "dev",
                 "forecasting/clients/api.py"
             ],
-            "jinja": true
+            "jinja": true,
+            "env": {
+                "LOGURU_LEVEL": "INFO"
+            }
         }
     ]
 }
