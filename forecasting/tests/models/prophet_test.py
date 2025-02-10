@@ -5,7 +5,7 @@ from forecasting.models.entities import Data
 from forecasting.models.prophet import ProphetModel
 
 
-def test_simple_average_model_generates_prediction():
+def test_prophet__default_input__generates_prediction():
     model = ProphetModel()
 
     data = Data.load_from_dict(EXAMPLE_INPUT)

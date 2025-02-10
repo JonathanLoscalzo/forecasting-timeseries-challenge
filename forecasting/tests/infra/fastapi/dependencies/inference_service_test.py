@@ -5,7 +5,7 @@ from forecasting.infra.fastapi.routers.dtos import Data as DataInput
 from forecasting.models.factories import ForecastModelFactory
 
 
-def test_inference_service_returns_forecast():
+def test_inference_service__receives_default_input__returns_forecast():
     factory = ForecastModelFactory()
     service = InferenceService(factory)
     start_date = date(2021, 1, 1)

@@ -7,7 +7,7 @@ from forecasting.models.factories import ForecastModelFactory
 from forecasting.models.simple_average import SimpleAverageModel
 
 
-def test_create_model_with_custom_registry():
+def test_model_factory__with_custom_key__creates_and_predicts():
     model = ForecastModelFactory({"TESTING": SimpleAverageModel}).create(model="TESTING")
     data = Data.load_from_dict(EXAMPLE_INPUT)
     data.horizon = 10
@@ -19,7 +19,7 @@ def test_create_model_with_custom_registry():
         assert result[i].date == start_date + timedelta(days=i)
 
 
-def test_create_model_with_fake_model():
+def test_model_factory__with_custom_key_and_fake_model__creates_and_predicts():
     today = date.today()
 
     class FakeModel:

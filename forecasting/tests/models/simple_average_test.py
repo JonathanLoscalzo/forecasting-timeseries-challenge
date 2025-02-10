@@ -5,7 +5,7 @@ from forecasting.models.entities import Data, Item
 from forecasting.models.simple_average import SimpleAverageModel
 
 
-def test_simple_average_model_generates_prediction():
+def test_simple_average_model__default_input__generates_prediction():
     model = SimpleAverageModel()
 
     data = Data.load_from_dict(EXAMPLE_INPUT)
