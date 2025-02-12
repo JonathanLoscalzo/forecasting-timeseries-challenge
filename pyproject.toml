@@ -9,7 +9,7 @@ readme = "README.md"
 pythonpath = ["forecasting"]
 testpaths = ["forecasting/tests"]
 markers = ["integration"]
-addopts = "-v -ra -q -m 'not integration'"
+addopts = "-vv -ra -q -m 'not integration'"
 
 
 filterwarnings = ["ignore::DeprecationWarning:holidays"]
@@ -46,7 +46,11 @@ line-length = 120
 
 [tool.flake8]
 max-line-length = 120
+extend-ignore = ["E203"]
 
+[tool.pylint.'MESSAGES CONTROL']
+max-line-length = 120
+disable = "C0330, R0201"
 
 [tool.poetry.scripts]
 forecast-ui = "forecasting.clients.streamlit:init"
