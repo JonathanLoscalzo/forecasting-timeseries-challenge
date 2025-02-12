@@ -45,6 +45,12 @@ test:
 	@pytest
 	@echo "✅ Tests completed."
 
+.PHONY: integration-test
+integration-test:
+	@echo "🧪 Running tests..."
+	@pytest -m integration
+	@echo "✅ Tests completed."
+
 .PHONY: coverage
 coverage:
 	@echo "📊 Running test coverage..."
