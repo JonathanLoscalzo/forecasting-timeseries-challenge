@@ -11,7 +11,7 @@ class InferenceService:
     def __init__(self, model_factory: ForecastModelFactory):
         self.model_factory = model_factory
 
-    def forecast(self, data: DataInput, model_name: Optional[ModelName] = None) -> list[DataOutput]:
+    def forecast(self, data: DataInput, model_name: Optional[ModelName] = None, **model_configs) -> list[DataOutput]:
         interim = data.model_dump()
         historical = interim["historical"].copy()
         del interim["historical"]
@@ -19,5 +19,5 @@ class InferenceService:
             **interim,
             historical=[{"date": dt, "value": value} for dt, value in historical.items()],  # type: ignore
         )
-        result = self.model_factory.create(model_name).forecast(data=features)
+        result = self.model_factory.create(model_name, **model_configs).forecast(data=features)
         return [DataOutput(**item.model_dump()) for item in result]

@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import datetime, timedelta
 
 from forecasting.const import EXAMPLE_INPUT
 from forecasting.models.entities import Data
@@ -9,7 +9,7 @@ def test_prophet__default_input__generates_prediction():
     model = ProphetModel()
 
     data = Data.load_from_dict(EXAMPLE_INPUT)
-    start_date = date.fromisoformat(EXAMPLE_INPUT["start_date"])
+    start_date = datetime.fromisoformat(EXAMPLE_INPUT["start_date"])
 
     result = model.forecast(data)
     assert len(result) == data.horizon

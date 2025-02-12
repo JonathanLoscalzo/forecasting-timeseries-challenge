@@ -8,7 +8,7 @@ from forecasting.models.entities import Item as Prediction
 
 
 class ProphetModel(ForecastModel):
-    def __init__(self):
+    def __init__(self, **kwargs):
         pass
 
     def forecast(self, data: Data) -> list[Prediction]:

@@ -16,4 +16,9 @@ async def forecast(
     model_name: ModelName = ModelName.simple_average,
     inference_service: InferenceService = Depends(Provide[ApiContainer.inference_service]),
 ):
-    return inference_service.forecast(data, model_name=model_name)
+    return inference_service.forecast(
+        data,
+        model_name=model_name,
+        weeks=data.n_weeks,
+        frequency=data.frequency,
+    )

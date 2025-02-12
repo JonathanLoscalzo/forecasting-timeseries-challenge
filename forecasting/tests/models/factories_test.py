@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import datetime, timedelta
 
 from forecasting.const import EXAMPLE_INPUT
 from forecasting.models.entities import Data
@@ -11,7 +11,7 @@ def test_model_factory__with_custom_key__creates_and_predicts():
     model = ForecastModelFactory({"TESTING": SimpleAverageModel}).create(model="TESTING")
     data = Data.load_from_dict(EXAMPLE_INPUT)
     data.horizon = 10
-    start_date = date.fromisoformat(EXAMPLE_INPUT["start_date"])
+    start_date = datetime.fromisoformat(EXAMPLE_INPUT["start_date"])
     result = model.forecast(data)
 
     assert len(result) == data.horizon
@@ -20,9 +20,12 @@ def test_model_factory__with_custom_key__creates_and_predicts():
 
 
 def test_model_factory__with_custom_key_and_fake_model__creates_and_predicts():
-    today = date.today()
+    today = datetime.today()
 
     class FakeModel:
+        def __init__(self, **kwargs):
+            pass
+
         def forecast(self, data: Data) -> list[Prediction]:
             return [Prediction(date=today, value=0.0)]
 

@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 
 from forecasting.const import EXAMPLE_INPUT
 from forecasting.models.entities import Data, Item
@@ -12,15 +12,15 @@ def test_simple_average_model__default_input__generates_prediction():
 
     result = model.forecast(data)
     expected_result = [
-        Item(date=date.fromisoformat(item["date"]), value=item["value"])
+        Item(date=datetime.fromisoformat(item["date"]), value=item["value"])
         for item in [
-            {"date": "2024-05-10", "value": 11.0},
-            {"date": "2024-05-11", "value": 10.75},
-            {"date": "2024-05-12", "value": 15.25},
-            {"date": "2024-05-13", "value": 9.8},
-            {"date": "2024-05-14", "value": 4.0},
-            {"date": "2024-05-15", "value": 11.0},
-            {"date": "2024-05-16", "value": 8.0},
+            {"date": "2024-05-10T00:00:00", "value": 10.0},
+            {"date": "2024-05-11T00:00:00", "value": 11.9375},
+            {"date": "2024-05-12T00:00:00", "value": 16.3125},
+            {"date": "2024-05-13T00:00:00", "value": 10.1875},
+            {"date": "2024-05-14T00:00:00", "value": 2.0625},
+            {"date": "2024-05-15T00:00:00", "value": 10.0625},
+            {"date": "2024-05-16T00:00:00", "value": 7.75},
         ]
     ]
     assert len(result) == data.horizon
